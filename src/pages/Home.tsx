@@ -1,5 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonButton } from '@ionic/react';
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -7,16 +6,18 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+          <IonTitle>Lap Timer</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
+        <IonItem>
+          <h1>00:00:00</h1>
+        </IonItem>
+          <IonButton>Start</IonButton>
+          <IonButton>Reset</IonButton>
+          <br></br>
+          <IonButton>Lap</IonButton>
+          <IonButton>Pause</IonButton>
       </IonContent>
     </IonPage>
   );

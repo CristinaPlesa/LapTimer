@@ -22,8 +22,11 @@ const Timer: React.FC = () => {
 
   return (
     <div>
-      <h1>Lap Timer</h1>
+      <h1>00:00:00</h1>
       <IonButton>Start</IonButton>
+      <IonButton>Pause</IonButton>
+      <IonButton>Reset</IonButton>
+      <IonButton>Lap</IonButton>
     </div>
   )
 }

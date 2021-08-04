@@ -1,5 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonButton } from '@ionic/react';
 import './Home.css';
+import Timer from '../components/Timer'
 
 const Home: React.FC = () => {
   return (
@@ -10,14 +11,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonItem>
-          <h1>00:00:00</h1>
-        </IonItem>
-          <IonButton>Start</IonButton>
-          <IonButton>Reset</IonButton>
-          <br></br>
-          <IonButton>Lap</IonButton>
-          <IonButton>Pause</IonButton>
+        <Timer/>
       </IonContent>
     </IonPage>
   );

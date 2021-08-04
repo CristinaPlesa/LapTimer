@@ -7,24 +7,21 @@ const Timer: React.FC = () => {
   const [ms, setMs] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
 
-  const tick = useCallback(async () => setMs(ms+1), [ms])
+  const tick = useCallback(async () => {
+    setMs(ms + 10)
+    console.log(ms)
+  }, [ms])
 
-  // isRunning &&
   useEffect(() => {
-    const timerId = setInterval(
-      isRunning
-        ? tick
-        : () => undefined,
-      10
-    )
-    return () => clearInterval(timerId)
+    const timerId = isRunning ? setInterval(tick, 10) : undefined
+    return () => timerId ? clearInterval(timerId) : undefined
   }, [isRunning, tick])
 
   return (
     <div>
-      <h1>00:00:00</h1>
-      <IonButton>Start</IonButton>
-      <IonButton>Pause</IonButton>
+      <h1>{ms}</h1>
+      <IonButton onClick={() => setIsRunning(true)}>Start</IonButton>
+      <IonButton onClick={() => setIsRunning(false)}>Pause</IonButton>
       <IonButton>Reset</IonButton>
       <IonButton>Lap</IonButton>
     </div>

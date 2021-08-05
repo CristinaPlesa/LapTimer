@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useMemo, useState } from 'react'
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonButton } from '@ionic/react';
-// import { msToClockUnits, msToClockString } from '../util/printTime'
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonLabel } from '@ionic/react';
+import {  msToClockString } from '../utilities/printTime'
+// import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
 
 // Cristina
 const Timer: React.FC = () => {
@@ -9,7 +10,7 @@ const Timer: React.FC = () => {
 
   const tick = useCallback(async () => {
     setMs(ms + 10)
-    console.log(ms)
+    console.log(msToClockString(ms))
   }, [ms])
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const Timer: React.FC = () => {
 
   return (
     <div>
-      <h1>{ms}</h1>
+      <h1>{msToClockString(ms)}</h1>
       <IonButton onClick={() => setIsRunning(true)}>Start</IonButton>
       <IonButton onClick={() => setIsRunning(false)}>Pause</IonButton>
       <IonButton>Reset</IonButton>

@@ -4,6 +4,7 @@ import {  msToClockString } from '../utilities/printTime'
 // import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
 
 // Cristina
+// think of ? as "if true, then this"
 const Timer: React.FC = () => {
   const [ms, setMs] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
@@ -18,13 +19,18 @@ const Timer: React.FC = () => {
     return () => timerId ? clearInterval(timerId) : undefined
   }, [isRunning, tick])
 
+  // const lapRecord = (click: number) => {
+  //   // work in progress
+  // }
+
   return (
     <div>
       <h1>{msToClockString(ms)}</h1>
       <IonButton onClick={() => setIsRunning(true)}>Start</IonButton>
       <IonButton onClick={() => setIsRunning(false)}>Pause</IonButton>
-      <IonButton>Reset</IonButton>
+      <IonButton onClick={() => setMs(0)}>Reset</IonButton>
       <IonButton>Lap</IonButton>
+      <h1 className="lap"></h1>
     </div>
   )
 }

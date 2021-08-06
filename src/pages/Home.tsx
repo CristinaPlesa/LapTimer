@@ -4,7 +4,7 @@ import Timer from '../components/Timer'
 
 const Home: React.FC = () => {
   return (
-    <IonPage>
+    <IonPage className="pageStyling">
       <IonHeader>
         <IonToolbar>
           <IonTitle>Lap Timer</IonTitle>

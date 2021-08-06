@@ -1,15 +1,15 @@
 import { useEffect, useCallback, useMemo, useState } from 'react'
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonLabel } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonLabel, IonList } from '@ionic/react';
 import {  msToClockString } from '../utilities/printTime'
 // import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
 
-// Cristina
 // think of ? as "if true, then this"
 const Timer: React.FC = () => {
   const [ms, setMs] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
+  const [lapTimes, setLapTimes] = useState([0])
 
-  const tick = useCallback(async () => {
+  const tick = useCallback(() => {
     setMs(ms + 10)
     console.log(msToClockString(ms))
   }, [ms])
@@ -19,18 +19,33 @@ const Timer: React.FC = () => {
     return () => timerId ? clearInterval(timerId) : undefined
   }, [isRunning, tick])
 
-  // const lapRecord = (click: number) => {
-  //   // work in progress
-  // }
+  // reduce() syntax from MDN example: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
+  const lapRecord = () => (
+    isRunning
+    ? (
+      lapTimes.push(ms - lapTimes.reduce((accumulator, currentValue) => accumulator + currentValue, 0)),
+      setLapTimes(lapTimes), console.log(lapTimes)
+    )
+    : (
+      setMs(0),
+      setLapTimes([0])
+    )
+  )
 
   return (
     <div>
-      <h1>{msToClockString(ms)}</h1>
-      <IonButton onClick={() => setIsRunning(true)}>Start</IonButton>
-      <IonButton onClick={() => setIsRunning(false)}>Pause</IonButton>
-      <IonButton onClick={() => setMs(0)}>Reset</IonButton>
-      <IonButton>Lap</IonButton>
-      <h1 className="lap"></h1>
+      <IonCard>
+        <h1>{msToClockString(ms)}</h1>
+        <IonButton onClick={() => setIsRunning(true)}>Start</IonButton>
+        <IonButton onClick={() => setIsRunning(false)}>Pause</IonButton>
+        <IonButton onClick={() => setMs(0)}>Reset</IonButton>
+        <IonButton onClick={() => lapRecord()}>Lap</IonButton>
+        <IonList>
+          {lapTimes.map((lapTime, index) => {
+            return (index !== 0) ? <IonItem key={index}><IonLabel>{lapTime}</IonLabel></IonItem> : undefined
+          })}
+        </IonList>
+      </IonCard>
     </div>
   )
 }
